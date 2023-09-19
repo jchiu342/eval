@@ -11,6 +11,7 @@ GO4GO_PATH = '/mnt/c/Users/wtasf/OneDrive/Documents/go/projects/go4go_db'
 def eval(request):
   template = loader.get_template('first.html')
   context = {
-    'asdf': random.choice(Eval.objects.all().values())
+    'pos': random.choice(Eval.objects.all().values())
   }
+  context['pos']['move'] -= 1
   return HttpResponse(template.render(context, request))
