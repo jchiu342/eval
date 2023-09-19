@@ -13,14 +13,15 @@
 
 <!--<div class="besogo-editor"></div>-->
 <!-- <div class="besogo-editor" sgf="{% static 'besogo/example2.sgf' %}"></div> -->
-<div class="besogo-editor" path={{pos.move}}>
+<div class="besogo-diagram" style="height: 500px; width: 500px" resize="fixed" path={{pos.move}}>
   {{pos.sgf_content}}
 </div>
 <!--<div class="besogo-diagram" panels="comment">-->
 <!--(;FF[4]GM[1]SZ[9]AB[bb:dd]AW[ee][ff][gg]-->
 <!--C[This diagram shows a 9x9 board with 9 black stones and 3 white stones placed on it.-->
 <!--Be sure to properly escape HTML special characters such as &gt;, &lt;, etc.])-->
-</div>
+<button onclick="getElementById('ans').innerHTML= {{pos.score}}"> Show Answer </button> <p id="ans"></p>
+<button onclick="window.location.href='/eval'"> Next </button>
 <div>
   <p1> {{pos.name}} {{pos.move}}
   </div>
