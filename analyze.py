@@ -45,15 +45,15 @@ class Game:
         """
         self.list = Game.parse_sgf(sgf, convert_moves=True)
         self.name = name
-        self.komi = 0
+        self.komi = 7.5
         self.rule = "japanese"
         self.boardsize = 19
 
         br = None
         for k, v in self.list:
-            if k == "KM":
-                self.komi = int(v)
-            elif k == "RU":
+            # if k == "KM":
+            #     self.komi = int(v)
+            if k == "RU":
                 self.rule = v.lower()
             elif k == "SZ":
                 self.boardsize = int(v)
@@ -68,9 +68,6 @@ class Game:
         for k, v in self.list:
             if k in ("B", "W"):
                 self.moves.append([k, v])
-
-        # SGFs are missing komi; use default Fox Go Server value
-        self.komi = 7.5
 
     def to_query(self, move: int, search=True):
         """
@@ -166,6 +163,8 @@ def analyze_games(game_dir, game_evals, num_games):
         idx = file.split(".")[0]
         if idx in game_evals.keys():
             continue
+        if int(idx[8:12]) < 2020:
+            continue
         game_evals[idx] = {}
         path_to_sgf = game_dir + "/" + file
         print(f"Analyzing {path_to_sgf}")
@@ -183,7 +182,7 @@ def analyze_games(game_dir, game_evals, num_games):
         if game.komi not in [6.5, 7.5]:
             raise ValueError
 
-        pos = random.randint(5, len(game.moves) - 1)
+        pos = random.randint(20, len(game.moves) - 1)
         query = {
             "id": idx,
             "moves": game.moves,
@@ -192,7 +191,7 @@ def analyze_games(game_dir, game_evals, num_games):
             "boardXSize": 19,
             "boardYSize": 19,
             "analyzeTurns": list(filter(lambda x: x < len(game.moves), [pos])),
-            "maxVisits": 200,
+            "maxVisits": 2500,
         }
         num_responses += len(query["analyzeTurns"])
 
@@ -222,5 +221,7 @@ def analyze_all(game_dir, game_evals=None):
 
 if __name__ == "__main__":
     game_evals = {}
-    z = analyze_games("db", game_evals, 50)
+    for _ in range(5):
+        z = analyze_games("../go4go_db", game_evals, 100)
+        game_evals = z
     pickle.dump(z, open("move_evals.pkl", "wb"))

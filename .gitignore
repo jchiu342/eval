@@ -2,4 +2,3 @@ db/
 __pycache__/
 analysis_logs/
 *.pkl
-*.sqlite3

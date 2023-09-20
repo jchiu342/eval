@@ -9,13 +9,9 @@ def add_to_db():
   for (name, info) in list(eval_pickle.items()):
     with open(GO4GO_PATH + "/" + name + ".sgf", "r") as sgf:
       content = sgf.read()
-    print(info)
     info = list(info.items())[0]
-    print(name)
-    print(info)
-    print(info[1])
     try:
-      e = Eval(name=name, sgf_content=content, move=info[0], score=info[1]['scoreLead'] * (1 if info[1]['currentPlayer'] == 'B' else -1))
+      e = Eval(name=name, sgf_content=content, move=info[0], score=info[1]['scoreLead'] * (1 if info[1]['currentPlayer'] == 'W' else -1))
       e.save()
     except Exception as f:
       print(f)
