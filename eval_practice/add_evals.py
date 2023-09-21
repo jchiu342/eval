@@ -11,7 +11,7 @@ def add_to_db():
       content = sgf.read()
     info = list(info.items())[0]
     try:
-      e = Eval(name=name, sgf_content=content, move=info[0], score=info[1]['scoreLead'] * (1 if info[1]['currentPlayer'] == 'W' else -1))
+      e = Eval(name=name, sgf_content=content, move=info[0], score=info[1]['scoreLead'])
       e.save()
     except Exception as f:
       print(f)

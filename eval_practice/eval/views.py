@@ -14,4 +14,6 @@ def eval(request):
     'pos': random.choice(Eval.objects.all().values())
   }
   context['pos']['move'] -= 1
+  if context['pos']['move'] % 2 == 1:
+    context['pos']['score'] *= -1
   return HttpResponse(template.render(context, request))
