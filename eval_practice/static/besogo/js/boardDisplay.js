@@ -396,7 +396,7 @@ besogo.makeBoardDisplay = function(container, editor) {
         }
 
         // Mark variants that have not already been marked above
-        markRemainingVariants(variants, current, group);
+        // markRemainingVariants(variants, current, group);
 
         svg.replaceChild(group, markupGroup); // Replace the markup group
         markupGroup = group;
