@@ -8,12 +8,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'besogo/css/besogo.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'besogo/css/board-wood.css'%}" id="theme">
 
-<script src = "{% static '/besogo/besogo.min.js'%}"></script>
+<script src = "{% static '/besogo/besogo.all.js'%}"></script>
 <script src = "{% static 'test.js'%}"></script>
 
 <!--<div class="besogo-editor"></div>-->
 <!-- <div class="besogo-editor" sgf="{% static 'besogo/example2.sgf' %}"></div> -->
-<div class="besogo-diagram" style="height: 500px; width: 500px" resize="fixed" path={{pos.move}}>
+<div class="besogo-diagram" style="height: 500px; width: 600px" resize="fixed" path={{pos.move}}>
   {{pos.sgf_content}}
 </div>
 <!--<div class="besogo-diagram" panels="comment">-->

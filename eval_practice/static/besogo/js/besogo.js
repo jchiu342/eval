@@ -11,6 +11,7 @@ besogo.create = function(container, options) {
         makers = { // Map to panel creators
             control: besogo.makeControlPanel,
             names: besogo.makeNamesPanel,
+            caps: besogo.makeCapsPanel,
             comment: besogo.makeCommentPanel,
             tool: besogo.makeToolPanel,
             tree: besogo.makeTreePanel,
@@ -288,7 +289,7 @@ besogo.autoInit = function() {
             options.panels = ['control', 'names', 'comment'];
             options.tool = 'navOnly';
         } else if (hasClass(targetDivs[i], 'besogo-diagram')) {
-            options.panels = [];
+            options.panels = ['caps'];
             options.tool = 'navOnly';
         }
 
